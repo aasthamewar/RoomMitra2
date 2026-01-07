@@ -1,0 +1,58 @@
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navigation from "./components/Navigation";
+import LandingPage from "./pages/LandingPage";
+import AvatarSelection from "./pages/AvatarSelection";
+import MatchResult from "./pages/MatchResult";
+import ProfileSettings from "./pages/ProfileSettings";
+import SmartRecommendations from "./pages/SmartRecommendations";
+import Payment from "./pages/Payment";
+import NotFound from "./pages/NotFound";
+import VoiceAgent from "./components/VoiceAgent";
+import RoomSelection from "./pages/RoomSelection";
+import Confirmation from "./pages/Confirmation";
+import FindMatch from "./pages/find_match";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Onboarding from "./pages/Onboarding";
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <div className="min-h-screen bg-background">
+          <Navigation />
+
+          <VoiceAgent />
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/avatar-selection" element={<AvatarSelection />} />
+            <Route path="/match-result" element={<MatchResult />} />
+            <Route path="/profile" element={<ProfileSettings />} />
+            <Route path="/recommendations" element={<SmartRecommendations />} />
+            <Route path="/rooms" element={<RoomSelection />} />
+            <Route path="/room-selection" element={<RoomSelection />} />
+            <Route path="/confirmation" element={<Confirmation />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/find_match" element={<FindMatch />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/onboarding" element={<Onboarding />} />
+
+
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
+
+export default App;
